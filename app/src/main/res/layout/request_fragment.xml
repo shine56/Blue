@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.shine56.blue.ui.request.RequestFragment"/>
+        <import type="com.shine56.blue.ui.request.RequestVm"/>
+        <variable
+            name="vm"
+            type="RequestVm" />
+        <variable
+            name="fragment"
+            type="RequestFragment" />
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.request.RequestFragment">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/et_base_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/baseUrl"
+                android:text="@={vm.requestBean.baseUrl}" />
+
+            <EditText
+                android:id="@+id/et_get_string"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/getString"
+                android:text="@={vm.requestBean.get}" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/baseUrl"
+                android:textColorHint="@color/black" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/start_request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{fragment.onClick}"
+            android:text="发起请求"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

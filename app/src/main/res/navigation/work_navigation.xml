@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/work_navigation"
+    app:startDestination="@+id/navigation_request">
+
+    <fragment
+        android:id="@+id/navigation_request"
+        android:name="com.shine56.blue.ui.request.RequestFragment"
+        android:label="@string/request"
+        tools:layout="@layout/request_fragment"/>
+    <fragment
+        android:id="@id/navigation_result"
+        android:name="com.shine56.blue.ui.result.ResultFragment"
+        android:label="@string/result"
+        tools:layout="@layout/result_fragment"/>
+    <fragment
+        android:id="@+id/navigation_arrange"
+        android:name="com.shine56.blue.ui.arrange.ArrangeFragment"
+        android:label="@string/arrange"
+        tools:layout="@layout/arrange_fragment"/>
+
+</navigation>

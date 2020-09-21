@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Blue</string>
+
+    <!--    导航-->
+    <string name="request">请求</string>
+    <string name="result">结果</string>
+    <string name="arrange">处理</string>
+
+<!--    请求-->
+    <string name="baseUrl">baseUrl</string>
+    <string name="getString">次级Url</string>
+</resources>
