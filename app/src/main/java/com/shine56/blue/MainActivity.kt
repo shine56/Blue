@@ -1,6 +1,7 @@
 package com.shine56.blue
 
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -30,12 +31,12 @@ class MainActivity : BaseActivity() {
 
         initView()
         onObserve()
-        vm.loadTask()
+        vm.refreshTask()
     }
 
     override fun onRestart() {
         super.onRestart()
-        vm.loadTask()
+        vm.refreshTask()
     }
 
     private fun initView(){
@@ -51,7 +52,9 @@ class MainActivity : BaseActivity() {
         val manager = LinearLayoutManager(this)
         taskAdapter = AppAdapter<RequestBean>(R.layout.list_task)
         taskAdapter.setOnBindListener { list, holder, position ->
+            holder.itemView.scrollTo(0, 0)
             val nameTv = holder.itemView.findViewById<TextView>(R.id.task_name)
+            val deleteBt = holder.itemView.findViewById<Button>(R.id.delete_task)
             nameTv.text = list[position].baseUrl
 
             nameTv.setOnClickListener {
@@ -59,6 +62,9 @@ class MainActivity : BaseActivity() {
                 "传送的id ${list[position].id}".logD()
                 bundle.putInt("requestId", list[position].id)
                 startActivity(WorkActivity::class.java, bundle)
+            }
+            deleteBt.setOnClickListener {
+                vm.deleteTask(list[position])
             }
         }
 
@@ -80,6 +86,8 @@ class MainActivity : BaseActivity() {
         vm.deleteState.observe(this, Observer {
             if (it) "删除成功".toast()
             else "删除失败".toast()
+
+            vm.refreshTask()
         })
     }
 

@@ -15,7 +15,7 @@ class HomeVm : BaseViewModel() {
     val taskList = MutableLiveData<List<RequestBean>>()
      var deleteState = MutableLiveData<Boolean>()
 
-    fun loadTask(){
+    fun refreshTask(){
         viewModelScope.launch(Dispatchers.IO) {
             val beans = Repository.loadAllRequestBeans()
             taskList.postValue(beans)
