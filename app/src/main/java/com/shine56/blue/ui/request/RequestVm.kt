@@ -11,7 +11,9 @@ import com.shine56.blue.model.bean.RequestBean
 import com.shine56.blue.model.repository.Repository
 import com.shine56.blue.model.service.JsonNetWork
 import com.shine56.blue.util.JsonUtil
+import com.shine56.blue.util.StringUtil
 import com.shine56.blue.util.logD
+import com.shine56.blue.util.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -22,10 +24,13 @@ class RequestVm: BaseViewModel() {
     val arrangeText = MutableLiveData<String>()
 
     var id: Int = 0
+    var selectTool = -1
 
     val requestBean = MutableLiveData<RequestBean>()
     val resultCode = MutableLiveData<Int>()
     val saveCode = MutableLiveData<Int>()
+
+    val jsonUtil by lazy { JsonUtil(text.value!!) }
 
     /**
      * 初始化
@@ -90,11 +95,33 @@ class RequestVm: BaseViewModel() {
         }
     }
 
+    fun arrange(input: String){
+        when(selectTool){
+            0 -> {
+                decodeUnicode()
+                "转换结束".toast()
+            }
+            1 -> {
+                deleteStr(input)
+                "删除".toast()
+            }
+            2 -> {
+                val regex = "**"
+                val strList = input.split(regex)
+                replaceStr(strList[0], strList[1])
+                "替换".toast()
+            }
+            3 -> {
+                match(input)
+                "正则".toast()
+            }
+        }
+    }
+
     /**
      * 正则
      */
-    val jsonUtil by lazy { JsonUtil(text.value!!) }
-    fun arrange(sign: String){
+    private fun match(sign: String){
         var resultText = ""
         val matcher =  jsonUtil.getContentByName(sign)
         while (matcher.find()){
@@ -103,4 +130,25 @@ class RequestVm: BaseViewModel() {
         arrangeText.value = resultText
     }
 
+    /**
+     * 去除某字符
+     */
+    private fun deleteStr(str: String){
+        arrangeText.value = StringUtil.deleteString(str, arrangeText.value!!)
+    }
+    /**
+     * 替换某字符
+     */
+    private fun replaceStr(oldStr: String, newString: String){
+        arrangeText.value = StringUtil.replaceString(oldStr, newString, arrangeText.value!!)
+    }
+
+    /**
+     * unicode转中文
+     */
+    private fun decodeUnicode(){
+        val result = StringUtil.decodeUnicode(arrangeText.value!!)
+        if(result != "") result
+        else text.value
+    }
 }

@@ -56,4 +56,18 @@ object StringUtil {
 //            ""
 //        }
     }
+
+    /**
+     * 去掉某字符
+     */
+    fun deleteString(str: String, text: String): String{
+        return text.replace(str, "")
+    }
+
+    /**
+     * 替换某字符
+     */
+    fun replaceString(oldStr: String, newStr: String, text: String): String{
+        return text.replace(oldStr,newStr)
+    }
 }
