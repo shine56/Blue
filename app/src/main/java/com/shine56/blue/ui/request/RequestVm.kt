@@ -10,6 +10,7 @@ import com.shine56.blue.base.MyApplication.Companion.SUCCESS
 import com.shine56.blue.model.bean.RequestBean
 import com.shine56.blue.model.repository.Repository
 import com.shine56.blue.model.service.JsonNetWork
+import com.shine56.blue.util.JsonUtil
 import com.shine56.blue.util.logD
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,6 +19,7 @@ import java.lang.Exception
 
 class RequestVm: BaseViewModel() {
     val text = MutableLiveData<String>()
+    val arrangeText = MutableLiveData<String>()
 
     var id: Int = 0
 
@@ -25,6 +27,9 @@ class RequestVm: BaseViewModel() {
     val resultCode = MutableLiveData<Int>()
     val saveCode = MutableLiveData<Int>()
 
+    /**
+     * 初始化
+     */
     fun refreshBean() {
 
         if(id == 0){
@@ -34,6 +39,9 @@ class RequestVm: BaseViewModel() {
         }
     }
 
+    /**
+     * 发起请求
+     */
     fun request(){
         //url为空
         val baseUrl = requestBean.value!!.baseUrl
@@ -60,6 +68,9 @@ class RequestVm: BaseViewModel() {
         }
     }
 
+    /**
+     * 保存数据库
+     */
     fun save(){
         viewModelScope.launch {
             try {
@@ -77,6 +88,19 @@ class RequestVm: BaseViewModel() {
                 saveCode.value = FAIL
             }
         }
-
     }
+
+    /**
+     * 正则
+     */
+    val jsonUtil by lazy { JsonUtil(text.value!!) }
+    fun arrange(sign: String){
+        var resultText = ""
+        val matcher =  jsonUtil.getContentByName(sign)
+        while (matcher.find()){
+            resultText += matcher.group()
+        }
+        arrangeText.value = resultText
+    }
+
 }
