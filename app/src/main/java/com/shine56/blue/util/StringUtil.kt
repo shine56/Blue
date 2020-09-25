@@ -1,8 +1,14 @@
 package com.shine56.blue.util
 
+import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 object StringUtil {
+
+    fun regularText(regex: String, text: String): Matcher {
+        val pattern = Pattern.compile(regex)
+        return pattern.matcher(text)
+    }
 
     /**
      * Unicode编码转中文

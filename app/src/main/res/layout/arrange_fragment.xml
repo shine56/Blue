@@ -86,14 +86,10 @@
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScrollView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
             android:fillViewport="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/arrange">
 
@@ -105,10 +101,11 @@
                     android:id="@+id/result"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
                     android:text="@{vm.arrangeText}"
                     android:textColor="@color/black"
                     android:textIsSelectable="true"
-
                     android:textSize="18dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -116,9 +113,10 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="164dp"
+                    android:layout_height="364dp"
                     android:background="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/result" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -123,7 +123,9 @@ class RequestVm: BaseViewModel() {
      */
     private fun match(sign: String){
         var resultText = ""
-        val matcher =  jsonUtil.getContentByName(sign)
+        if(arrangeText.value == null ) arrangeText.value = text.value
+        val matcher =  StringUtil.regularText(sign, text.value!!)
+            //jsonUtil.getContentByName(sign)
         while (matcher.find()){
             resultText += matcher.group()
         }
@@ -148,7 +150,6 @@ class RequestVm: BaseViewModel() {
      */
     private fun decodeUnicode(){
         val result = StringUtil.decodeUnicode(arrangeText.value!!)
-        if(result != "") result
-        else text.value
+        arrangeText.value = if(result != "") result else text.value
     }
 }
