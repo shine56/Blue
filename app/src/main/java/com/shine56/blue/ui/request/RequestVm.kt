@@ -127,7 +127,7 @@ class RequestVm: BaseViewModel() {
         val matcher =  StringUtil.regularText(sign, text.value!!)
             //jsonUtil.getContentByName(sign)
         while (matcher.find()){
-            resultText += "${matcher.group()}\n\n"
+            resultText += "结果：\n${matcher.group()}\n\n结束\n\n"
         }
         arrangeText.value = resultText
     }
